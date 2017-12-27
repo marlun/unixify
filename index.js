@@ -5,12 +5,13 @@ const nanorouter = require('nanorouter')
 const nanobus = require('nanobus')
 
 const bus = nanobus()
-const events = { RENDER: 'render' }
 const router = nanorouter()
-let state = { msg: 'hello, world' }
+
+const state = { msg: 'hello, world' }
+
 let tree = null
 
-bus.prependListener(events.RENDER, function () {
+bus.prependListener('render', function () {
   var newTree = router(window.location.pathname)
   morph(tree, newTree)
 })
