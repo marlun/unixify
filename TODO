@@ -1,4 +1,4 @@
 * [x] Use 'bel' to ouput "hello, world"
-* [ ] Find the simplest path to get output using nanomorph
+* [x] Add nanorouter to the game
+* [x] Find the simplest path to get output using nanomorph
 * [ ] Add state management and re-render on 'render' event
-* [ ] Add nanorouter to the game

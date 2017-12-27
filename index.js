@@ -1,7 +1,20 @@
-var html = require('bel')
+const assert = require('assert')
+const documentReady = require('document-ready')
+const html = require('bel')
+const morph = require('nanomorph')
+const nanorouter = require('nanorouter')
+const nanobus = require('nanobus')
 
-// Create a stand-alone DOM tree
-var tree = html`<div>hello, world</div>`
+const router = nanorouter()
+let state = { msg: 'hello, world' }
+let tree = null
 
-// Append the tree form above to the current web browser DOM tree
-document.body.appendChild(tree)
+router.on('/', function () {
+  return html`<body><div>${state.msg}</div></body>`
+})
+
+documentReady(function () {
+  tree = document.querySelector('body')
+  var newTree = router(window.location.pathname)
+  morph(tree, newTree)
+})
