@@ -1,4 +1,3 @@
-const assert = require('assert')
 const documentReady = require('document-ready')
 const html = require('bel')
 const morph = require('nanomorph')
