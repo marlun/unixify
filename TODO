@@ -1,0 +1,3 @@
+* [ ] Find the simplest path to get output using nanomorph
+* [ ] Add nanorouter to the game
+* [ ] Add state management and re-render on 'render' event
