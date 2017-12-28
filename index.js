@@ -2,6 +2,7 @@ const html = require('bel')
 const morph = require('nanomorph')
 const nanorouter = require('nanorouter')
 const nanobus = require('nanobus')
+const NoteList = require('./NoteList')
 
 const bus = nanobus()
 const router = nanorouter()
@@ -14,13 +15,13 @@ let tree = null
 // We listen for 'render' events and re-render the application, morphing from
 // the DOM tree created from the last state into the the new.
 bus.prependListener('render', function () {
-  var newTree = router(window.location.pathname)
+  const newTree = router(window.location.pathname)
   morph(tree, newTree)
 })
 
 document.addEventListener('DOMContentLoaded', function () {
   tree = document.querySelector('body')
-  var newTree = router(window.location.pathname)
+  const newTree = router(window.location.pathname)
   morph(tree, newTree)
 })
 
@@ -29,8 +30,16 @@ router.on('/', mainView)
 
 // A view has access to the application state
 function mainView () {
-  return html`<body>${NoteList(state.notes)}</body>`
-}
+  // A component only have access to state that it needs and we also send down
+  // the behaviors that it needs like what happends when we hit the ENTER key
+  const noteList = NoteList({
+    notes: state.notes,
+    onEnter: onEnter
+  })
+  return html`<body>${noteList}</body>`
 
-// A component only have access to state that it needs
-function NoteList (notes) { }
+  function onEnter (note) {
+    state.notes.push(note)
+    bus.emit('render')
+  }
+}
