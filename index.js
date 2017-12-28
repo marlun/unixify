@@ -1,8 +1,7 @@
-const html = require('bel')
 const morph = require('nanomorph')
 const nanorouter = require('nanorouter')
 const nanobus = require('nanobus')
-const NoteList = require('./NoteList')
+const mainView = require('./views/mainView')
 
 const bus = nanobus()
 const router = nanorouter()
@@ -19,6 +18,19 @@ bus.prependListener('render', function () {
   morph(tree, newTree)
 })
 
+// When calling a handler for a router we send in the application state and
+// a function which can be used to emit events. We don't send in the entire
+// bus since we want to keep business logic and render logic separate.
+function addRoute (route, handler) {
+  router.on(route, function (params) {
+    return handler(state, function (eventName, data) {
+      bus.emit(eventName, data)
+    })
+  })
+}
+
+// Set the loaded document body as the tree and then morph it into a new tree
+// generated from the application state
 document.addEventListener('DOMContentLoaded', function () {
   tree = document.querySelector('body')
   const newTree = router(window.location.pathname)
@@ -26,20 +38,4 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 // Setup which views should be loaded on which routes
-router.on('/', mainView)
-
-// A view has access to the application state
-function mainView () {
-  // A component only have access to state that it needs and we also send down
-  // the behaviors that it needs like what happends when we hit the ENTER key
-  const noteList = NoteList({
-    notes: state.notes,
-    onEnter: onEnter
-  })
-  return html`<body>${noteList}</body>`
-
-  function onEnter (note) {
-    state.notes.push(note)
-    bus.emit('render')
-  }
-}
+addRoute('/', mainView)

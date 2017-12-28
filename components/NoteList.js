@@ -6,18 +6,10 @@ module.exports = function NoteList (props) {
       <input
         type="text"
         autofocus
-        onkeydown=${onKeyDown}>
+        onkeydown=${props.onKeyDown}>
       ${getBody(props.notes)}
     </div>
   `
-
-  function onKeyDown (e) {
-    const value = e.target.value
-    if (!value) return
-    if (e.keyCode === 13) {
-      props.onEnter(value)
-    }
-  }
 }
 
 function getBody (notes) {
