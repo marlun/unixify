@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "browserify -p tinyify index.js > bundle.js",
     "start": "budo index.js",
     "test": "standard && npm run test-deps",
     "test-deps": "dependency-check . && dependency-check . --extra --no-dev -i tachyons"
@@ -20,6 +21,7 @@
   "devDependencies": {
     "budo": "^10.0.4",
     "dependency-check": "^2.9.2",
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "tinyify": "^2.4.0"
   }
 }
