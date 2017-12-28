@@ -5,7 +5,7 @@ const nanobus = require('nanobus')
 
 const bus = nanobus()
 const router = nanorouter()
-const state = {}
+const state = { notes: [] }
 
 // This variable will hold the current DOM tree which will be rendered in the
 // web browser
@@ -18,18 +18,19 @@ bus.prependListener('render', function () {
   morph(tree, newTree)
 })
 
-router.on('/', function () {
-  return html`<body><div>${state.msg}</div></body>`
-})
-
 document.addEventListener('DOMContentLoaded', function () {
-  state.msg = 'hello, world'
   tree = document.querySelector('body')
   var newTree = router(window.location.pathname)
   morph(tree, newTree)
 })
 
-setTimeout(function () {
-  state.msg = 'awesome'
-  bus.emit('render')
-}, 2000)
+// Setup which views should be loaded on which routes
+router.on('/', mainView)
+
+// A view has access to the application state
+function mainView () {
+  return html`<body>${NoteList(state.notes)}</body>`
+}
+
+// A component only have access to state that it needs
+function NoteList (notes) { }
