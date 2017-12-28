@@ -24,7 +24,7 @@ bus.prependListener('render', function () {
 function addRoute (route, handler) {
   router.on(route, function (params) {
     return handler(state, function (eventName, data) {
-      bus.emit(eventName, data)
+      bus.emit.apply(bus, arguments)
     })
   })
 }
