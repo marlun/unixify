@@ -5,9 +5,10 @@ module.exports = function NoteList (props) {
     <div>
       <input
         type="text"
+        value="${props.notes.input}"
         autofocus
         onkeydown=${props.onKeyDown}>
-      ${getBody(props.notes)}
+      ${getBody(props.notes.all)}
     </div>
   `
 }

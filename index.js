@@ -2,10 +2,12 @@ const morph = require('nanomorph')
 const nanorouter = require('nanorouter')
 const nanobus = require('nanobus')
 const mainView = require('./views/mainView')
+const notesStore = require('./stores/notes')
+const events = require('./events')
 
 const bus = nanobus()
 const router = nanorouter()
-const state = { notes: [] }
+const state = {}
 
 // This variable will hold the current DOM tree which will be rendered in the
 // web browser
@@ -13,7 +15,7 @@ let tree = null
 
 // We listen for 'render' events and re-render the application, morphing from
 // the DOM tree created from the last state into the the new.
-bus.prependListener('render', function () {
+bus.prependListener(events.RENDER, function () {
   const newTree = router(window.location.pathname)
   morph(tree, newTree)
 })
@@ -29,9 +31,14 @@ function addRoute (route, handler) {
   })
 }
 
+// Initialize all our stores which conatins all our business logic and handles
+// the state of the application
+notesStore(state, bus)
+
 // Set the loaded document body as the tree and then morph it into a new tree
 // generated from the application state
 document.addEventListener('DOMContentLoaded', function () {
+  bus.emit(events.DOMCONTENTLOADED)
   tree = document.querySelector('body')
   const newTree = router(window.location.pathname)
   morph(tree, newTree)

@@ -16,8 +16,10 @@ module.exports = function mainView (state, emit) {
     const value = e.target.value
     if (!value) return
     if (e.keyCode === 13) {
-      state.notes.push(value)
-      emit('render')
+      emit('notes:input', '')
+      emit('notes:create', value)
+    } else {
+      emit('notes:input', value)
     }
   }
 }
