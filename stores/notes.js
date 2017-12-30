@@ -3,7 +3,7 @@ const events = require('../events')
 module.exports = function Notes (state, bus) {
   state.notes = {
     input: '',
-    all: []
+    items: []
   }
   bus.on(events.DOMCONTENTLOADED, function () {
     bus.on('notes:input', onInput)
@@ -12,10 +12,11 @@ module.exports = function Notes (state, bus) {
 
   function onInput (text) {
     state.notes.input = text
+    bus.emit('render')
   }
 
   function onCreate (text) {
-    state.notes.all.push(text)
+    state.notes.items.push(text)
     bus.emit('render')
   }
 }
