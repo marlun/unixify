@@ -3,7 +3,6 @@ const NoteList = require('../components/NoteList')
 
 // A view has access to the application state
 module.exports = function mainView (state, emit) {
-  console.log(state)
   const notes = state.notes.input !== ''
     ? state.notes.items.filter(note => note.includes(state.notes.input))
     : state.notes.items
