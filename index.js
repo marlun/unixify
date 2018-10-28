@@ -40,7 +40,7 @@ notesStore(state, bus)
 document.addEventListener('DOMContentLoaded', function () {
   bus.emit(events.DOMCONTENTLOADED)
   tree = document.querySelector('body')
-  const newTree = router(window.location.pathname)
+  const newTree = router.router(window.location.pathname)
   morph(tree, newTree)
 })
 
