@@ -16,7 +16,7 @@ let tree = null
 // We listen for 'render' events and re-render the application, morphing from
 // the DOM tree created from the last state into the the new.
 bus.prependListener(events.RENDER, function () {
-  const newTree = router(window.location.pathname)
+  const newTree = router.emit(window.location.pathname)
   morph(tree, newTree)
 })
 
@@ -40,7 +40,7 @@ notesStore(state, bus)
 document.addEventListener('DOMContentLoaded', function () {
   bus.emit(events.DOMCONTENTLOADED)
   tree = document.querySelector('body')
-  const newTree = router.router(window.location.pathname)
+  const newTree = router.emit(window.location.pathname)
   morph(tree, newTree)
 })
 
