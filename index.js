@@ -20,9 +20,10 @@ bus.prependListener(events.RENDER, function () {
   morph(tree, newTree)
 })
 
-// When calling a handler for a router we send in the application state and
-// a function which can be used to emit events. We don't send in the entire
-// bus since we want to keep business logic and render logic separate.
+// When calling a handler for a route (views) we send in the application state
+// and a function which can be used to emit events. We don't send in the entire
+// bus since we want to keep business logic and render logic separate. We also
+// add the params to the state object so that views can access it
 function addRoute (route, handler) {
   router.on(route, function (params) {
     state.params = params
@@ -36,8 +37,9 @@ function addRoute (route, handler) {
 // the state of the application
 notesStore(state, bus)
 
-// Set the loaded document body as the tree and then morph it into a new tree
-// generated from the application state
+// Initialize the application after the HTML document has been completely
+// loaded and parsed (DOMContentLoaded event) by calling a route handler and
+// morphing the current document body DOM to the resulting tree.
 document.addEventListener('DOMContentLoaded', function () {
   bus.emit(events.DOMCONTENTLOADED)
   tree = document.querySelector('body')
