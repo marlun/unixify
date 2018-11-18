@@ -25,6 +25,7 @@ bus.prependListener(events.RENDER, function () {
 // bus since we want to keep business logic and render logic separate.
 function addRoute (route, handler) {
   router.on(route, function (params) {
+    state.params = params
     return handler(state, function (eventName, data) {
       bus.emit.apply(bus, arguments)
     })
