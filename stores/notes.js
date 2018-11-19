@@ -1,5 +1,3 @@
-const events = require('../events')
-
 module.exports = function Notes (state, bus) {
   state.notes = {
     input: '',

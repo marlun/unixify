@@ -3,7 +3,6 @@ const nanorouter = require('nanorouter')
 const nanobus = require('nanobus')
 const mainView = require('./views/mainView')
 const notesStore = require('./stores/notes')
-const events = require('./events')
 
 const bus = nanobus()
 const router = nanorouter()
@@ -15,7 +14,7 @@ let tree = null
 
 // We listen for 'render' events and re-render the application, morphing from
 // the DOM tree created from the last state into the the new.
-bus.prependListener(events.RENDER, function () {
+bus.prependListener('render', function () {
   const newTree = router.emit(window.location.pathname)
   morph(tree, newTree)
 })
