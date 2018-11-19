@@ -1,7 +1,6 @@
 const html = require('bel')
 const NoteList = require('../components/NoteList')
 
-// A view has access to the application state
 module.exports = function mainView (state, emit) {
   const notes = state.notes.input !== ''
     ? state.notes.items.filter(note => note.includes(state.notes.input))
@@ -23,7 +22,7 @@ module.exports = function mainView (state, emit) {
   }
 
   function onFilterKeyDown (e) {
-    if (e.keyCode === 13) {
+    if (e.key.toUpperCase() === 'ENTER') {
       emit('notes:create', e.target.value)
       emit('notes:input', '')
     }
