@@ -1,15 +1,15 @@
 var html = require('bel')
 
-module.exports = function NoteList (props) {
+module.exports = function NoteList (options) {
   return html`
     <div>
       <input
         type="text"
-        value="${props.input}"
+        value="${options.input}"
         autofocus
-        oninput=${props.onFilterInput}
-        onkeydown=${props.onFilterKeyDown}>
-      ${getBody(props.notes)}
+        oninput=${options.onFilterInput}
+        onkeydown=${options.onFilterKeyDown}>
+      ${getBody(options.notes)}
     </div>
   `
 }
