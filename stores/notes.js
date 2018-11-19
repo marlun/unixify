@@ -5,10 +5,9 @@ module.exports = function Notes (state, bus) {
     input: '',
     items: []
   }
-  bus.on(events.DOMCONTENTLOADED, function () {
-    bus.on('notes:input', onInput)
-    bus.on('notes:create', onCreate)
-  })
+
+  bus.on('notes:input', onInput)
+  bus.on('notes:create', onCreate)
 
   function onInput (text) {
     state.notes.input = text

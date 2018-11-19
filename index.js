@@ -44,7 +44,6 @@ addRoute('/', mainView)
 // loaded and parsed (DOMContentLoaded event) by calling a route handler and
 // morphing the current document body DOM to the resulting tree.
 document.addEventListener('DOMContentLoaded', function () {
-  bus.emit(events.DOMCONTENTLOADED)
   tree = document.querySelector('body')
   const newTree = router.emit(window.location.pathname)
   morph(tree, newTree)
