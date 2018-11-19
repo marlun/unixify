@@ -37,6 +37,9 @@ function addRoute (route, handler) {
 // the state of the application
 notesStore(state, bus)
 
+// Setup which views should be loaded on which routes
+addRoute('/', mainView)
+
 // Initialize the application after the HTML document has been completely
 // loaded and parsed (DOMContentLoaded event) by calling a route handler and
 // morphing the current document body DOM to the resulting tree.
@@ -46,6 +49,3 @@ document.addEventListener('DOMContentLoaded', function () {
   const newTree = router.emit(window.location.pathname)
   morph(tree, newTree)
 })
-
-// Setup which views should be loaded on which routes
-addRoute('/', mainView)
