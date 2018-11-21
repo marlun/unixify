@@ -2,6 +2,10 @@
   "name": "unixify",
   "version": "1.0.0",
   "description": "",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/marlun/unixify"
+  },
   "main": "index.js",
   "scripts": {
     "deps": "dependency-check . && dependency-check . --unused --no-dev",
