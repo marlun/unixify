@@ -11,7 +11,8 @@
     "deps": "dependency-check . && dependency-check . --unused --no-dev",
     "build": "browserify -p tinyify index.js > bundle.js",
     "start": "budo index.js --pushstate",
-    "test": "standard && npm run deps && node test.js"
+    "test": "standard && npm run deps && node test.js",
+    "test:update": "UPDATE_SNAPSHOT=true npm test"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,7 @@
     "nanorouter": "^3.1.1"
   },
   "devDependencies": {
+    "assert-snapshot": "^1.0.1",
     "budo": "^11.5.0",
     "dependency-check": "^3.2.1",
     "standard": "^12.0.1",

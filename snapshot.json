@@ -1,0 +1,6 @@
+{
+  "renders correctly": "\n    <div>\n      <input\n        type=\"text\"\n        value=\"\"\n        autofocus\n        oninput=\"\"\n        onkeydown=\"\">\n      \n    <ul>\n      <li>test</li>\n    </ul>\n  \n    </div>\n  ",
+  "renders correctly with zero element": "\n    <div>\n      <input\n        type=\"text\"\n        value=\"\"\n        autofocus\n        oninput=\"\"\n        onkeydown=\"\">\n      <p>You have no notes</p>\n    </div>\n  ",
+  "renders correctly with one element": "\n    <div>\n      <input\n        type=\"text\"\n        value=\"\"\n        autofocus\n        oninput=\"\"\n        onkeydown=\"\">\n      \n    <ul>\n      <li>test</li>\n    </ul>\n  \n    </div>\n  ",
+  "renders correctly with three element": "\n    <div>\n      <input\n        type=\"text\"\n        value=\"\"\n        autofocus\n        oninput=\"\"\n        onkeydown=\"\">\n      \n    <ul>\n      <li>one</li><li>two</li><li>three</li>\n    </ul>\n  \n    </div>\n  "
+}

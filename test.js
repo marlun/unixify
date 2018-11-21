@@ -1,6 +1,8 @@
 const test = require('tape')
-const notesStore = require('./stores/notes')
 const nanobus = require('nanobus')
+const snap = require('assert-snapshot')
+const notesStore = require('./stores/notes')
+const NoteList = require('./components/NoteList')
 
 test('notes store', function (t) {
   t.test('should initialize state', function (t) {
@@ -33,5 +35,43 @@ test('notes store', function (t) {
     notesStore(state, bus)
     bus.emit('notes:create', 'test')
     t.equal(state.notes.items[0], 'test')
+  })
+})
+
+test('NoteList', function (t) {
+  t.test('renders correctly with zero element', function (t) {
+    const options = {
+      input: '',
+      notes: [],
+      onFilterInput: function () {},
+      onFilterKeyDown: function () {}
+    }
+    const str = NoteList(options).toString()
+    snap(t, str)
+    t.end()
+  })
+
+  t.test('renders correctly with one element', function (t) {
+    const options = {
+      input: '',
+      notes: ['test'],
+      onFilterInput: function () {},
+      onFilterKeyDown: function () {}
+    }
+    const str = NoteList(options).toString()
+    snap(t, str)
+    t.end()
+  })
+
+  t.test('renders correctly with three element', function (t) {
+    const options = {
+      input: '',
+      notes: ['one', 'two', 'three'],
+      onFilterInput: function () {},
+      onFilterKeyDown: function () {}
+    }
+    const str = NoteList(options).toString()
+    snap(t, str)
+    t.end()
   })
 })
