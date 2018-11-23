@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/marlun/unixify"
+    "type": "git",
+    "url": "https://github.com/marlun/unixify"
   },
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,8 @@
     "build": "browserify -p tinyify index.js > bundle.js",
     "start": "budo index.js --pushstate",
     "test": "standard && npm run deps && node test.js",
-    "test:update": "UPDATE_SNAPSHOT=true npm test"
+    "test:update": "UPDATE_SNAPSHOT=true npm test",
+    "test:coverage": "nyc tape test.js"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +28,7 @@
     "assert-snapshot": "^1.0.1",
     "budo": "^11.5.0",
     "dependency-check": "^3.2.1",
+    "nyc": "^13.1.0",
     "standard": "^12.0.1",
     "tape": "^4.9.1",
     "tinyify": "^2.5.0"
